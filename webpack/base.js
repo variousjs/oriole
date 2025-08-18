@@ -65,6 +65,7 @@ const config = {
             options: {
               sourceMap: NODE_ENV === 'development',
               modules: {
+                exportLocalsConvention: 'camelCase',
                 localIdentName: '[local]_[hash:base64:5]',
               },
             },
