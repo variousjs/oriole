@@ -1,5 +1,7 @@
 import React from 'react'
 import { LexicalComposer, InitialConfigType } from '@lexical/react/LexicalComposer'
+
+import { ToolbarProvider } from './plugins/toolbar-plugin/context'
 import theme from './themes/default'
 import nodes from './nodes'
 import Editor from './editor'
@@ -16,7 +18,9 @@ const Oriole = () => {
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <Editor />
+      <ToolbarProvider>
+        <Editor />
+      </ToolbarProvider>
     </LexicalComposer>
   )
 }
