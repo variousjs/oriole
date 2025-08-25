@@ -82,5 +82,5 @@ export const useToolbarState = () => {
     throw new Error('useToolbarState must be used within a ToolbarProvider')
   }
 
-  return context
+  return context!
 }

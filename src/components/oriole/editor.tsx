@@ -17,6 +17,7 @@ import { useLexicalEditable } from '@lexical/react/useLexicalEditable'
 
 import csses from './editor.less'
 import ContentEditable from './ui/content-editable'
+import ToolbarPlugin from './plugins/toolbar-plugin'
 
 interface Props {
   placeholder?: string,
@@ -28,6 +29,7 @@ const Editor = (props: Props) => {
   const [editor] = useLexicalComposerContext()
   const [floatingAnchorElem, setFloatingAnchorElem] = useState<HTMLDivElement | null>(null)
   const [activeEditor, setActiveEditor] = useState(editor)
+  const [isLinkEditMode, setIsLinkEditMode] = useState(false)
 
   const onEditorRef = (element: HTMLDivElement) => {
     if (element !== null) {
@@ -39,6 +41,12 @@ const Editor = (props: Props) => {
   return (
     <>
       <div className={csses.editorContainer}>
+        <ToolbarPlugin
+          editor={editor}
+          activeEditor={activeEditor}
+          setActiveEditor={setActiveEditor}
+          setIsLinkEditMode={setIsLinkEditMode}
+        />
         <AutoFocusPlugin />
         <ClearEditorPlugin />
         <HashtagPlugin />

@@ -1,7 +1,6 @@
 import { EditorThemeClasses } from 'lexical'
+import { THEME_PREFIX as PREFIX } from '../config'
 import './default.less'
-
-const PREFIX = 'oriole'
 
 const theme: EditorThemeClasses = {
   autocomplete: PREFIX + '__autocomplete',
