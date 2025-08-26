@@ -34,7 +34,7 @@ const config = {
     // 必须加上 .js，不然 webpack dev server 会报错找不到模块
     extensions: ['.js', '.ts', '.tsx'],
     alias: {
-      '@': path.resolve(__dirname, '../src/shadcn-ui'),
+      '~': path.resolve(__dirname, '../src/components/oriole'),
     },
   },
   devServer: {

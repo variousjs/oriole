@@ -9,9 +9,10 @@ import {$isHeadingNode} from '@lexical/rich-text'
 import { $isCodeNode, normalizeCodeLanguage } from '@lexical/code'
 
 import { useToolbarState } from './context'
-import { IMAGE_CAPTION_CONTAINER, DEFAULT_FONT_COLOR, DEFAULT_BACKGROUND_COLOR, DEFAULT_FONT_FAMILY } from '../../config'
-import { getSelectedNode, $findTopLevelElement } from '../../utils'
+import { IMAGE_CAPTION_CONTAINER, DEFAULT_FONT_COLOR, DEFAULT_BACKGROUND_COLOR, DEFAULT_FONT_FAMILY } from '~/config'
+import { getSelectedNode, $findTopLevelElement } from '~/utils'
 import { blockTypeToBlockName, DEFAULT_FONT_SIZE } from './config'
+import BlockFormat from './block-format'
 
 interface Props {
   editor: LexicalEditor,
@@ -275,6 +276,12 @@ const Toolbar = (props: Props) => {
         Redo
         <i />
       </button>
+      <BlockFormat
+        disabled={!isEditable}
+        blockType={toolbarState.blockType}
+        editor={activeEditor}
+        activeEditor={activeEditor}
+      />
     </div>
   )
 }

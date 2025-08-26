@@ -3,6 +3,8 @@ import { isDOMNode } from 'lexical'
 import { createPortal } from 'react-dom'
 import DropDownItems from './items'
 
+export { default as DropDownItem } from './item'
+
 interface Props {
   disabled?: boolean,
   label?: string,
