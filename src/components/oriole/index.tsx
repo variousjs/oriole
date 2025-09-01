@@ -1,7 +1,7 @@
 import React from 'react'
 import { LexicalComposer, InitialConfigType } from '@lexical/react/LexicalComposer'
 
-import { ToolbarProvider } from './plugins/toolbar-plugin/context'
+import { ToolbarProvider } from './plugins/toolbar/context'
 import theme from './themes/default'
 import nodes from './nodes'
 import Editor from './editor'

@@ -1,5 +1,6 @@
 import { EditorThemeClasses } from 'lexical'
 import { THEME_PREFIX as PREFIX } from '../config'
+import { subImageClassName } from '~/nodes/image'
 import './default.less'
 
 const theme: EditorThemeClasses = {
@@ -55,7 +56,7 @@ const theme: EditorThemeClasses = {
   },
   hr: PREFIX + '__hr',
   hrSelected: PREFIX + '__hrSelected',
-  image: PREFIX + '__image',
+  image: PREFIX + subImageClassName,
   indent: PREFIX + '__indent',
   layoutContainer: PREFIX + '__layoutContainer',
   layoutItem: PREFIX + '__layoutItem',

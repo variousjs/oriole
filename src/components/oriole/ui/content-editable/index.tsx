@@ -2,6 +2,8 @@ import React from 'react'
 import { ContentEditable as LexicalContentEditable } from '@lexical/react/LexicalContentEditable'
 import csses from './index.less'
 
+export const rootClassName = 'content-editable-root'
+
 interface Props {
   placeholder?: string,
 }
@@ -11,7 +13,7 @@ const ContentEditable = (props: Props) => {
 
   return (
     <LexicalContentEditable
-      className={csses.contentEditable}
+      className={`${csses.contentEditable} ${rootClassName}`}
       aria-placeholder={placeholder}
       placeholder={(
         <div className={csses.placeholder}>

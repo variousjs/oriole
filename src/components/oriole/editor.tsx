@@ -17,7 +17,7 @@ import { useLexicalEditable } from '@lexical/react/useLexicalEditable'
 
 import csses from './editor.less'
 import ContentEditable from './ui/content-editable'
-import ToolbarPlugin from './plugins/toolbar-plugin'
+import ToolbarPlugin from './plugins/toolbar'
 
 interface Props {
   placeholder?: string,

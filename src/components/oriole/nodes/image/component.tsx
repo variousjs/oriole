@@ -18,6 +18,7 @@ import { mergeRegister } from '@lexical/utils'
 import BrokenImage from '~/ui/broken-image'
 import LazyImage from './lazy'
 import ImageResizer from './image-resizer'
+import { $isImageNode } from './'
 
 interface Props {
   altText?: string,

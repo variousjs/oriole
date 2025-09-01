@@ -3,15 +3,22 @@ import {
   $applyNodeReplacement,
   DecoratorNode,
   DOMConversionMap,
-  EditorConfig,
+  LexicalNode,
   LexicalUpdateJSON,
 } from 'lexical'
+import { THEME_PREFIX } from '~/config'
 import { ImagePayload, SerializedImageNode } from './types'
 import ImageComponent from './component'
 
 export function $createImageNode(params: ImagePayload) {
   return $applyNodeReplacement(new ImageNode(params))
 }
+
+export function $isImageNode(node: LexicalNode | null | undefined) {
+  return node instanceof ImageNode;
+}
+
+export const subImageClassName = '__image'
 
 function $convertImageElement(domNode: Node) {
   const img = domNode as HTMLImageElement
@@ -117,9 +124,9 @@ class ImageNode extends DecoratorNode<ReactNode> {
     writable.__height = height
   }
 
-  createDOM(config: EditorConfig) {
+  createDOM() {
     const div = document.createElement('div')
-    const className = config.theme.image
+    const className = THEME_PREFIX + subImageClassName
     if (className !== undefined) {
       div.className = className
       div.style.display = 'inline-block'
