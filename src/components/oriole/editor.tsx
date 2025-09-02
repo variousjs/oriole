@@ -39,42 +39,38 @@ const Editor = (props: Props) => {
 
 
   return (
-    <>
-      <div className={csses.editorContainer}>
-        <ToolbarPlugin
-          editor={editor}
-          activeEditor={activeEditor}
-          setActiveEditor={setActiveEditor}
-          setIsLinkEditMode={setIsLinkEditMode}
-        />
-        <AutoFocusPlugin />
-        <ClearEditorPlugin />
-        <HashtagPlugin />
-        <HistoryPlugin />
-        <RichTextPlugin
-          contentEditable={
-            <div className={csses.editorScroller}>
-              <div className={csses.editor} ref={onEditorRef}>
-                <ContentEditable placeholder={props.placeholder} />
-              </div>
-            </div>
-          }
-          ErrorBoundary={LexicalErrorBoundary}
-        />
-        <ListPlugin hasStrictIndent />
-        <CheckListPlugin />
-        <TablePlugin hasHorizontalScroll />
-        <ClickableLinkPlugin disabled={isEditable} />
-        <HorizontalRulePlugin />
-        <TabIndentationPlugin maxIndent={5} />
-        {
-          props.maxLength ? <CharacterLimitPlugin
-            charset="UTF-8"
-            maxLength={props.maxLength}
-          /> : null
+    <div className={csses.editorContainer}>
+      <ToolbarPlugin
+        editor={editor}
+        activeEditor={activeEditor}
+        setActiveEditor={setActiveEditor}
+        setIsLinkEditMode={setIsLinkEditMode}
+      />
+      <AutoFocusPlugin />
+      <ClearEditorPlugin />
+      <HashtagPlugin />
+      <HistoryPlugin />
+      <RichTextPlugin
+        contentEditable={
+          <div className={csses.editor} ref={onEditorRef}>
+            <ContentEditable placeholder={props.placeholder} />
+          </div>
         }
-      </div>
-    </>
+        ErrorBoundary={LexicalErrorBoundary}
+      />
+      <ListPlugin hasStrictIndent />
+      <CheckListPlugin />
+      <TablePlugin hasHorizontalScroll />
+      <ClickableLinkPlugin disabled={isEditable} />
+      <HorizontalRulePlugin />
+      <TabIndentationPlugin maxIndent={5} />
+      {
+        props.maxLength ? <CharacterLimitPlugin
+          charset="UTF-8"
+          maxLength={props.maxLength}
+        /> : null
+      }
+    </div>
   )
 }
 

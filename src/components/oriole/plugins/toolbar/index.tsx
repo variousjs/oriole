@@ -13,6 +13,7 @@ import { IMAGE_CAPTION_CONTAINER, DEFAULT_FONT_COLOR, DEFAULT_BACKGROUND_COLOR, 
 import { getSelectedNode, $findTopLevelElement } from '~/utils'
 import { blockTypeToBlockName, DEFAULT_FONT_SIZE } from './config'
 import BlockFormat from './block-format'
+import csses from './index.less'
 
 interface Props {
   editor: LexicalEditor,
@@ -255,7 +256,7 @@ const Toolbar = (props: Props) => {
   }, [$updateToolbar, activeEditor, editor, updateToolbarState])
 
   return (
-    <div>
+    <div className={csses.toolbar}>
       <button
         disabled={!toolbarState.canUndo || !isEditable}
         onClick={() => {
