@@ -1,0 +1,31 @@
+@import "../global.less";
+
+.item {
+  display: flex;
+  align-items: center;
+  color: #0a0a0a;
+  padding: 6px 8px;
+  box-sizing: border-box;
+  width: 100%;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-top: 6px;
+  border-radius: 6px;
+  transition: all .3s ease;
+  gap: 10px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:hover {
+    background: #eaeaeb;
+  }
+}
+
+.items {
+  .shadow-panel();
+  max-height: 300px;
+  position: fixed;
+  z-index: 100;
+}
