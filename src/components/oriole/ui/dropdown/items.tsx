@@ -1,5 +1,6 @@
 import React, { ReactNode, Ref, RefObject, useCallback, useState, KeyboardEvent, useMemo, useEffect } from 'react'
 import { DropDownContext } from './context'
+import csses from './index.less'
 
 interface Props {
   children: ReactNode,
@@ -20,14 +21,18 @@ const DropDownItems = (props: Props) => {
       return
     }
 
-    const { key } = e
+    const { key, target } = e
 
-    if (['Escape', 'ArrowUp', 'ArrowDown', 'Tab'].includes(key)) {
+    if (['Escape', 'ArrowUp', 'ArrowDown', 'Tab', 'Enter'].includes(key)) {
       e.preventDefault()
     }
 
     if (key === 'Escape' || key === 'Tab') {
       props.onClose()
+    }
+
+    if (key === 'Enter') {
+      target.click()
     }
 
     if (key === 'ArrowUp') {
@@ -50,7 +55,10 @@ const DropDownItems = (props: Props) => {
     }
   }
 
-  const contextValue = useMemo(() => ({ registerItem }),[registerItem])
+  const contextValue = useMemo(() => ({
+    registerItem,
+    handleClose: props.onClose,
+  }),[registerItem, props.onClose])
 
   useEffect(() => {
     if (items && !highlightedItem) {
@@ -64,7 +72,11 @@ const DropDownItems = (props: Props) => {
 
   return (
     <DropDownContext.Provider value={contextValue}>
-      <div ref={props.dropDownRef} onKeyDown={handleKeyDown}>
+      <div
+        className={csses.items}
+        ref={props.dropDownRef}
+        onKeyDown={handleKeyDown}
+      >
         {props.children}
       </div>
     </DropDownContext.Provider>

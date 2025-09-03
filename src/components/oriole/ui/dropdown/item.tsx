@@ -1,9 +1,9 @@
 import React, { ReactNode, MouseEvent, useRef, useContext, useEffect } from 'react'
 import { DropDownContext } from './context'
+import csses from './index.less'
 
 interface Props {
   children: ReactNode,
-  className?: string,
   onClick: (e: MouseEvent<HTMLDivElement>) => void,
 }
 
@@ -15,7 +15,7 @@ const DropDownItem = (props: Props) => {
     throw new Error('DropDownItem must be used within a DropDown')
   }
 
-  const { registerItem } = dropDownContext
+  const { registerItem, handleClose } = dropDownContext
 
   useEffect(() => {
     if (ref?.current) {
@@ -25,9 +25,13 @@ const DropDownItem = (props: Props) => {
 
   return (
     <div
-      className={props.className}
-      onClick={props.onClick}
+      className={csses.item}
+      onClick={(e) => {
+        props.onClick(e)
+        handleClose()
+      }}
       ref={ref}
+      tabIndex={-1}
     >
       {props.children}
     </div>

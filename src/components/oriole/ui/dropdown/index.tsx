@@ -27,7 +27,7 @@ const DropDown = (props: Props) => {
 
   const handleClose = () => {
     setShowDropDown(false)
-  };
+  }
 
   useEffect(() => {
     const trigger = triggerRef.current
@@ -40,7 +40,7 @@ const DropDown = (props: Props) => {
           return
         }
 
-        if (!trigger.contains(target)) {
+        if (!trigger.contains(target) && !dropDownRef.current?.contains(target)) {
           setShowDropDown(false)
         }
       }
@@ -69,7 +69,7 @@ const DropDown = (props: Props) => {
       }
     }
 
-    // handlePositionUpdate()
+    handlePositionUpdate()
 
     document.addEventListener('scroll', handlePositionUpdate)
     window.addEventListener('resize', handlePositionUpdate)
@@ -88,7 +88,6 @@ const DropDown = (props: Props) => {
         ref={triggerRef}
       >
         {props.label}
-        <i />
       </div>
 
       {showDropDown &&
