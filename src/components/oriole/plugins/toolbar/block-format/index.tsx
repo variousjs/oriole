@@ -10,8 +10,9 @@ import {
   formatCheckList,
   formatCode,
   formatQuote,
-} from '~/utils'
+} from '../utils'
 import { SHORTCUTS } from '~/config'
+import csses from './index.less'
 
 interface Props {
   blockType: keyof typeof blockTypeToBlockName,

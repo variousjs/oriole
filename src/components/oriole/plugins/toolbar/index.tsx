@@ -10,7 +10,7 @@ import { $isCodeNode, normalizeCodeLanguage } from '@lexical/code'
 
 import { useToolbarState } from './context'
 import { IMAGE_CAPTION_CONTAINER, DEFAULT_FONT_COLOR, DEFAULT_BACKGROUND_COLOR, DEFAULT_FONT_FAMILY } from '~/config'
-import { getSelectedNode, $findTopLevelElement } from '~/utils'
+import { getSelectedNode, $findTopLevelElement } from './utils'
 import { blockTypeToBlockName, DEFAULT_FONT_SIZE } from './config'
 import BlockFormat from './block-format'
 import csses from './index.less'

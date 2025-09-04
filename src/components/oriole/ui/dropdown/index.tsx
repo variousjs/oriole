@@ -1,13 +1,15 @@
 import React, { ReactNode, useEffect, useRef, useState } from 'react'
-import { isDOMNode } from 'lexical'
 import { createPortal } from 'react-dom'
+import { isDOMNode } from 'lexical'
 import DropDownItems from './items'
+import { Down } from '../icons'
+import csses from './index.less'
 
 export { default as DropDownItem } from './item'
 
 interface Props {
   disabled?: boolean,
-  label?: string,
+  label: ReactNode,
   children: ReactNode,
 }
 
@@ -83,11 +85,17 @@ const DropDown = (props: Props) => {
   return (
     <>
       <div
-        className={props.disabled ? 'disabled' : ''}
-        onClick={() => setShowDropDown(!showDropDown)}
+        className={`${csses.trigger} ${props.disabled ? csses.disabled : ''}`}
+        onClick={() => {
+          if (props.disabled) {
+            return
+          }
+          setShowDropDown(!showDropDown)
+        }}
         ref={triggerRef}
       >
         {props.label}
+        <Down />
       </div>
 
       {showDropDown &&
