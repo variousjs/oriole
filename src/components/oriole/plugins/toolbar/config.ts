@@ -12,7 +12,7 @@ export const blockTypeToBlockName = {
   h5: 'Heading 5',
   h6: 'Heading 6',
   number: 'Numbered List',
-  paragraph: 'Normal',
+  paragraph: 'Text',
   quote: 'Quote',
 }
 

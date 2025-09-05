@@ -12,6 +12,7 @@ import {
   formatQuote,
 } from '../utils'
 import { SHORTCUTS } from '~/config'
+import * as Icons from '~/ui/icons'
 import csses from './index.less'
 
 interface Props {
@@ -28,65 +29,107 @@ const BlockFormat = (porps: Props) => {
     return null
   }
 
+  const map: Record<typeof blockType, undefined | {
+    icon: keyof typeof Icons,
+    shortcut?: string,
+    onClick?: () => void,
+  }> = {
+    h6: {
+      icon: 'H6',
+    },
+    paragraph: {
+      icon: 'Text',
+      shortcut: SHORTCUTS.NORMAL,
+      onClick: () => formatParagraph(editor),
+    },
+    h1: {
+      icon: 'H1',
+      shortcut: SHORTCUTS.HEADING1,
+      onClick: () => formatHeading(editor, blockType, 'h1'),
+    },
+    h2: {
+      icon: 'H2',
+      shortcut: SHORTCUTS.HEADING2,
+      onClick: () => formatHeading(editor, blockType, 'h2'),
+    },
+    h3: {
+      icon: 'H3',
+      shortcut: SHORTCUTS.HEADING3,
+      onClick: () => formatHeading(editor, blockType, 'h3'),
+    },
+    h4: {
+      icon: 'H4',
+      shortcut: SHORTCUTS.HEADING4,
+      onClick: () => formatHeading(editor, blockType, 'h4'),
+    },
+    h5: {
+      icon: 'H5',
+      shortcut: SHORTCUTS.HEADING5,
+      onClick: () => formatHeading(editor, blockType, 'h5'),
+    },
+    number: {
+      icon: 'NumberList',
+      shortcut: SHORTCUTS.NUMBERED_LIST,
+      onClick: () => formatNumberedList(editor, blockType),
+    },
+    bullet: {
+      icon: 'List',
+      shortcut: SHORTCUTS.BULLET_LIST,
+      onClick: () => formatBulletList(editor, blockType),
+    },
+    check: {
+      icon: 'CheckList',
+      shortcut: SHORTCUTS.CHECK_LIST,
+      onClick: () => formatCheckList(editor, blockType),
+    },
+    quote: {
+      icon: 'Quote',
+      shortcut: SHORTCUTS.QUOTE,
+      onClick: () => formatQuote(editor, blockType),
+    },
+    code: {
+      icon: 'Code',
+      shortcut: SHORTCUTS.CODE_BLOCK,
+      onClick: () => formatCode(editor, blockType),
+    },
+  }
+
+  const list = Object.keys(map) as Array<typeof blockType>
+  const currentType = map[blockType]!
+  const CurrentIcon = Icons[currentType.icon]
+
   return (
     <DropDown
       disabled={disabled}
-      label={blockTypeToBlockName[blockType]}
+      label={(
+        <div className={csses.name}>
+          <CurrentIcon />{blockTypeToBlockName[blockType]}
+        </div>
+      )}
+      value={blockType}
     >
-      <DropDownItem
-        onClick={() => formatParagraph(editor)}
-      >
-        <span>Normal</span>
-        <span>{SHORTCUTS.NORMAL}</span>
-      </DropDownItem>
-      <DropDownItem
-        onClick={() => formatHeading(editor, blockType, 'h1')}
-      >
-        <span>Heading 1</span>
-        <span>{SHORTCUTS.HEADING1}</span>
-      </DropDownItem>
-      <DropDownItem
-        onClick={() => formatHeading(editor, blockType, 'h2')}
-      >
-        <span>Heading 2</span>
-        <span>{SHORTCUTS.HEADING2}</span>
-      </DropDownItem>
-      <DropDownItem
-        onClick={() => formatHeading(editor, blockType, 'h3')}
-      >
-        <span>Heading 3</span>
-        <span>{SHORTCUTS.HEADING3}</span>
-      </DropDownItem>
-      <DropDownItem
-        onClick={() => formatNumberedList(editor, blockType)}
-      >
-        <span>Numbered List</span>
-        <span>{SHORTCUTS.NUMBERED_LIST}</span>
-      </DropDownItem>
-      <DropDownItem
-        onClick={() => formatBulletList(editor, blockType)}
-      >
-        <span>Bullet List</span>
-        <span>{SHORTCUTS.BULLET_LIST}</span>
-      </DropDownItem>
-      <DropDownItem
-        onClick={() => formatCheckList(editor, blockType)}
-      >
-        <span className="text">Check List</span>
-        <span className="shortcut">{SHORTCUTS.CHECK_LIST}</span>
-      </DropDownItem>
-      <DropDownItem
-        onClick={() => formatQuote(editor, blockType)}
-      >
-        <span>Quote</span>
-        <span>{SHORTCUTS.QUOTE}</span>
-      </DropDownItem>
-      <DropDownItem
-        onClick={() => formatCode(editor, blockType)}
-      >
-        <span>Code Block</span>
-        <span>{SHORTCUTS.CODE_BLOCK}</span>
-      </DropDownItem>
+      {
+        list.map((type) => {
+          const config = map[type]
+
+          if (!config?.onClick) {
+            return null
+          }
+
+          const Icon = Icons[config.icon]
+
+          return (
+            <DropDownItem
+              key={type}
+              onClick={config.onClick}
+              value={type}
+            >
+              <span className={csses.name}><Icon />{blockTypeToBlockName[type]}</span>
+              <span className={csses.shortcut}>{config.shortcut}</span>
+            </DropDownItem>
+          )
+        })
+      }
     </DropDown>
   );
 }

@@ -18,6 +18,8 @@ export const SHORTCUTS = Object.freeze({
   HEADING1: IS_APPLE ? '⌘+Opt+1' : 'Ctrl+Alt+1',
   HEADING2: IS_APPLE ? '⌘+Opt+2' : 'Ctrl+Alt+2',
   HEADING3: IS_APPLE ? '⌘+Opt+3' : 'Ctrl+Alt+3',
+  HEADING4: IS_APPLE ? '⌘+Opt+4' : 'Ctrl+Alt+4',
+  HEADING5: IS_APPLE ? '⌘+Opt+5' : 'Ctrl+Alt+5',
   NUMBERED_LIST: IS_APPLE ? '⌘+Shift+7' : 'Ctrl+Shift+7',
   BULLET_LIST: IS_APPLE ? '⌘+Shift+8' : 'Ctrl+Shift+8',
   CHECK_LIST: IS_APPLE ? '⌘+Shift+9' : 'Ctrl+Shift+9',

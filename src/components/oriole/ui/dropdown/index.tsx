@@ -11,6 +11,7 @@ interface Props {
   disabled?: boolean,
   label: ReactNode,
   children: ReactNode,
+  value?: string,
 }
 
 const DROP_DOWN_PADDING = 4
@@ -100,7 +101,7 @@ const DropDown = (props: Props) => {
 
       {showDropDown &&
         createPortal(
-          <DropDownItems dropDownRef={dropDownRef} onClose={handleClose}>
+          <DropDownItems value={props.value} dropDownRef={dropDownRef} onClose={handleClose}>
             {props.children}
           </DropDownItems>,
           document.body,

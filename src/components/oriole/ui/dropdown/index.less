@@ -11,16 +11,21 @@
   padding: 6px 8px;
   font-size: 15px;
   gap: 12px;
+  border: 1px solid transparent;
 
-  &:hover, &:focus {
+  &:hover, &.active {
     background: #f5f5f5;
+  }
+
+  &:focus {
     outline: 0;
+    border-color: #babec7c7;
   }
 }
 
 .items {
   .shadow-panel();
-  max-height: 400px;
+  max-height: 310px;
   position: fixed;
   z-index: 100;
   display: flex;
@@ -32,8 +37,15 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  color: #24272ec7;
+  color: #2c2c2c;
   gap: 12px;
+  padding: 6px 8px;
+  font-size: 15px;
+  border-radius: 5px;
+
+  &:hover {
+    background: #f5f5f5;
+  }
 
   &.disabled {
     cursor: not-allowed;

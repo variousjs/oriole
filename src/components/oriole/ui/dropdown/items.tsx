@@ -6,6 +6,7 @@ interface Props {
   children: ReactNode,
   dropDownRef: Ref<HTMLDivElement>,
   onClose: () => void,
+  value?: string,
 }
 
 const DropDownItems = (props: Props) => {
@@ -58,7 +59,8 @@ const DropDownItems = (props: Props) => {
   const contextValue = useMemo(() => ({
     registerItem,
     handleClose: props.onClose,
-  }),[registerItem, props.onClose])
+    value: props.value,
+  }),[registerItem, props.onClose, props.value])
 
   useEffect(() => {
     if (items && !highlightedItem) {

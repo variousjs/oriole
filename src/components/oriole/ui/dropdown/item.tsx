@@ -4,7 +4,8 @@ import csses from './index.less'
 
 interface Props {
   children: ReactNode,
-  onClick: (e: MouseEvent<HTMLDivElement>) => void,
+  onClick?: (e: MouseEvent<HTMLDivElement>) => void,
+  value?: string,
 }
 
 const DropDownItem = (props: Props) => {
@@ -15,7 +16,7 @@ const DropDownItem = (props: Props) => {
     throw new Error('DropDownItem must be used within a DropDown')
   }
 
-  const { registerItem, handleClose } = dropDownContext
+  const { registerItem, handleClose, value } = dropDownContext
 
   useEffect(() => {
     if (ref?.current) {
@@ -25,9 +26,9 @@ const DropDownItem = (props: Props) => {
 
   return (
     <div
-      className={csses.item}
+      className={`${csses.item} ${value?.length && props.value === value ? csses.active : ''}`}
       onClick={(e) => {
-        props.onClick(e)
+        props.onClick?.(e)
         handleClose()
       }}
       ref={ref}
