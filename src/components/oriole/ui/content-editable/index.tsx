@@ -16,9 +16,9 @@ const ContentEditable = (props: Props) => {
       className={`${csses.contentEditable} ${rootClassName}`}
       aria-placeholder={placeholder}
       placeholder={(
-        <p className={csses.placeholder}>
+        <div className={csses.placeholder}>
           {placeholder}
-        </p>
+        </div>
       )}
     />
   )
