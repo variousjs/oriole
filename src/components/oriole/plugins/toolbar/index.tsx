@@ -1,6 +1,23 @@
 import React, { Dispatch, useCallback, useEffect, useState } from 'react'
-import { $getSelection, $isElementNode, $isNodeSelection, $isRangeSelection, CAN_REDO_COMMAND, CAN_UNDO_COMMAND, COMMAND_PRIORITY_CRITICAL, LexicalEditor, LexicalNode, NodeKey, REDO_COMMAND, SELECTION_CHANGE_COMMAND, UNDO_COMMAND } from 'lexical'
-import { $findMatchingParent, $getNearestNodeOfType, $isEditorIsNestedEditor, IS_APPLE, mergeRegister } from '@lexical/utils'
+import {
+  $getSelection,
+  $isElementNode,
+  $isNodeSelection,
+  $isRangeSelection,
+  CAN_REDO_COMMAND,
+  CAN_UNDO_COMMAND,
+  COMMAND_PRIORITY_CRITICAL,
+  LexicalEditor,
+  LexicalNode,
+  NodeKey,
+  SELECTION_CHANGE_COMMAND,
+} from 'lexical'
+import {
+  $findMatchingParent,
+  $getNearestNodeOfType,
+  $isEditorIsNestedEditor,
+  mergeRegister,
+} from '@lexical/utils'
 import { $getSelectionStyleValueForProperty, $isParentElementRTL } from '@lexical/selection'
 import { $isLinkNode } from '@lexical/link'
 import { $isListNode, ListNode } from '@lexical/list'
@@ -13,6 +30,7 @@ import { IMAGE_CAPTION_CONTAINER, DEFAULT_FONT_COLOR, DEFAULT_BACKGROUND_COLOR, 
 import { getSelectedNode, $findTopLevelElement } from './utils'
 import { blockTypeToBlockName, DEFAULT_FONT_SIZE } from './config'
 import BlockFormat from './block-format'
+import { Undo, Redo } from './do'
 import csses from './index.less'
 
 interface Props {
@@ -257,26 +275,8 @@ const Toolbar = (props: Props) => {
 
   return (
     <div className={csses.toolbar}>
-      <button
-        disabled={!toolbarState.canUndo || !isEditable}
-        onClick={() => {
-          activeEditor.dispatchCommand(UNDO_COMMAND, undefined);
-        }}
-        title={IS_APPLE ? 'Undo (⌘Z)' : 'Undo (Ctrl+Z)'}
-      >
-        Undo
-        <i />
-      </button>
-      <button
-        disabled={!toolbarState.canRedo || !isEditable}
-        onClick={() => {
-          activeEditor.dispatchCommand(REDO_COMMAND, undefined);
-        }}
-        title={IS_APPLE ? 'Redo (⇧⌘Z)' : 'Redo (Ctrl+Y)'}
-      >
-        Redo
-        <i />
-      </button>
+      <Undo activeEditor={activeEditor} isEditable={isEditable} />
+      <Redo activeEditor={activeEditor} isEditable={isEditable} />
       <BlockFormat
         disabled={!isEditable}
         blockType={toolbarState.blockType}
