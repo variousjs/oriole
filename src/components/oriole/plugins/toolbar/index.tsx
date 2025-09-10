@@ -30,7 +30,12 @@ import { IMAGE_CAPTION_CONTAINER, DEFAULT_FONT_COLOR, DEFAULT_BACKGROUND_COLOR, 
 import { getSelectedNode, $findTopLevelElement } from './utils'
 import { blockTypeToBlockName, DEFAULT_FONT_SIZE } from './config'
 import BlockFormat from './block-format'
-import { Undo, Redo } from './do'
+import {
+  Undo,
+  Redo,
+  Bold,
+  Italic,
+} from './stuff'
 import csses from './index.less'
 
 interface Props {
@@ -283,6 +288,8 @@ const Toolbar = (props: Props) => {
         editor={activeEditor}
         activeEditor={activeEditor}
       />
+      <Bold activeEditor={activeEditor} isEditable={isEditable} />
+      <Italic activeEditor={activeEditor} isEditable={isEditable} />
     </div>
   )
 }

@@ -1,8 +1,9 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, CSSProperties } from 'react'
 import { joinClasses } from '~/utils'
 import csses from './index.less'
 
 interface Props {
+  style?: CSSProperties,
   children?: ReactNode,
   disabled?: boolean,
   onClick?: () => void,
@@ -10,16 +11,19 @@ interface Props {
   title?: string,
   prefix?: ReactNode,
   suffix?: ReactNode,
+  active?: boolean,
 }
 
 const Button = (props: Props) => {
   return (
     <div className={csses.wrap}>
       <button
+        style={props.style}
         disabled={props.disabled}
         className={joinClasses(
           csses.button,
           props.disabled && csses.disabled,
+          props.active && csses.active,
           props.className,
         )}
         onClick={props.onClick}

@@ -11,8 +11,8 @@ import {
   formatCode,
   formatQuote,
 } from '../utils'
-import { SHORTCUTS } from '~/config'
 import * as Icons from '~/ui/icons'
+import Button from '~/ui/button'
 import csses from './index.less'
 
 interface Props {
@@ -31,7 +31,6 @@ const BlockFormat = (porps: Props) => {
 
   const map: Record<typeof blockType, undefined | {
     icon: keyof typeof Icons,
-    shortcut?: string,
     onClick?: () => void,
   }> = {
     h6: {
@@ -39,57 +38,46 @@ const BlockFormat = (porps: Props) => {
     },
     paragraph: {
       icon: 'Text',
-      shortcut: SHORTCUTS.NORMAL,
       onClick: () => formatParagraph(editor),
     },
     h1: {
       icon: 'H1',
-      shortcut: SHORTCUTS.HEADING1,
       onClick: () => formatHeading(editor, blockType, 'h1'),
     },
     h2: {
       icon: 'H2',
-      shortcut: SHORTCUTS.HEADING2,
       onClick: () => formatHeading(editor, blockType, 'h2'),
     },
     h3: {
       icon: 'H3',
-      shortcut: SHORTCUTS.HEADING3,
       onClick: () => formatHeading(editor, blockType, 'h3'),
     },
     h4: {
       icon: 'H4',
-      shortcut: SHORTCUTS.HEADING4,
       onClick: () => formatHeading(editor, blockType, 'h4'),
     },
     h5: {
       icon: 'H5',
-      shortcut: SHORTCUTS.HEADING5,
       onClick: () => formatHeading(editor, blockType, 'h5'),
     },
     number: {
       icon: 'NumberList',
-      shortcut: SHORTCUTS.NUMBERED_LIST,
       onClick: () => formatNumberedList(editor, blockType),
     },
     bullet: {
       icon: 'List',
-      shortcut: SHORTCUTS.BULLET_LIST,
       onClick: () => formatBulletList(editor, blockType),
     },
     check: {
       icon: 'CheckList',
-      shortcut: SHORTCUTS.CHECK_LIST,
       onClick: () => formatCheckList(editor, blockType),
     },
     quote: {
       icon: 'Quote',
-      shortcut: SHORTCUTS.QUOTE,
       onClick: () => formatQuote(editor, blockType),
     },
     code: {
       icon: 'Code',
-      shortcut: SHORTCUTS.CODE_BLOCK,
       onClick: () => formatCode(editor, blockType),
     },
   }
@@ -101,10 +89,14 @@ const BlockFormat = (porps: Props) => {
   return (
     <DropDown
       disabled={disabled}
-      label={(
-        <div className={csses.name}>
-          <CurrentIcon />{blockTypeToBlockName[blockType]}
-        </div>
+      trigger={(
+        <Button
+          style={{ gap: 0 }}
+          prefix={<CurrentIcon />}
+          suffix={(
+            <Icons.Down style={{ zoom: .5, opacity: .7 }} />
+          )}
+        />
       )}
       value={blockType}
     >
@@ -125,7 +117,6 @@ const BlockFormat = (porps: Props) => {
               value={type}
             >
               <span className={csses.name}><Icon />{blockTypeToBlockName[type]}</span>
-              <span className={csses.shortcut}>{config.shortcut}</span>
             </DropDownItem>
           )
         })
