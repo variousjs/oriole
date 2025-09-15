@@ -12,6 +12,7 @@ interface Props {
   prefix?: ReactNode,
   suffix?: ReactNode,
   active?: boolean,
+  block?: boolean,
 }
 
 const Button = (props: Props) => {
@@ -24,6 +25,7 @@ const Button = (props: Props) => {
           csses.button,
           props.disabled && csses.disabled,
           props.active && csses.active,
+          props.block && csses.block,
           props.className,
         )}
         onClick={props.onClick}

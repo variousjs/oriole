@@ -13,7 +13,6 @@ import {
 } from '../utils'
 import * as Icons from '~/ui/icons'
 import Button from '~/ui/button'
-import csses from './index.less'
 
 interface Props {
   blockType: keyof typeof blockTypeToBlockName,
@@ -116,7 +115,13 @@ const BlockFormat = (porps: Props) => {
               onClick={config.onClick}
               value={type}
             >
-              <span className={csses.name}><Icon />{blockTypeToBlockName[type]}</span>
+              <Button
+                prefix={<Icon />}
+                block
+                active={blockType === type}
+              >
+                {blockTypeToBlockName[type]}
+              </Button>
             </DropDownItem>
           )
         })
