@@ -77,7 +77,7 @@ const BlockFormat = (porps: Props) => {
       onClick: () => formatQuote(editor, blockType),
     },
     code: {
-      icon: 'Code',
+      icon: 'CodeBlock',
       onClick: () => formatCode(editor, blockType),
     },
   }

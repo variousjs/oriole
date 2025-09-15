@@ -6,9 +6,10 @@ import {
   Undo as U,
   Bold as B,
   Italic as I,
+  Code as C,
+  Underline as UL,
 } from '~/ui/icons'
 import { useToolbarState } from '../context'
-import csses from './index.less'
 
 interface Props {
   isEditable: boolean,
@@ -73,6 +74,38 @@ export const Italic = (props: Props) => {
       active={toolbarState.isItalic}
       title="Italic"
       prefix={<I />}
+    />
+  )
+}
+
+export const Underline = (props: Props) => {
+  const { toolbarState } = useToolbarState()
+
+  return (
+    <Button
+      disabled={!props.isEditable}
+      onClick={() => {
+        props.activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline');
+      }}
+      active={toolbarState.isUnderline}
+      title="Underline"
+      prefix={<UL />}
+    />
+  )
+}
+
+export const FormatCode = (props: Props) => {
+  const { toolbarState } = useToolbarState()
+
+  return (
+    <Button
+      disabled={!props.isEditable}
+      onClick={() => {
+        props.activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code');
+      }}
+      active={toolbarState.isCode}
+      title="Code"
+      prefix={<C />}
     />
   )
 }

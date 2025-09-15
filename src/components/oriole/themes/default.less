@@ -140,16 +140,27 @@
 .@{prefix}__nestedListItem:after {
   display: none;
 }
-
-
-
-
+.@{prefix}__textCode {
+  background-color: #f5f5f5;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: Menlo, Consolas, Monaco, monospace;
+  color: #262626;
+}
 .@{prefix}__textBold {
   font-weight: bold;
 }
 .@{prefix}__textItalic {
   font-style: italic;
 }
+.@{prefix}__textUnderline {
+  text-decoration: underline;
+}
+
+
+
+
+
 .@{prefix}__paragraph mark {
   background-color: unset;
 }
@@ -157,11 +168,6 @@
   background: rgba(255, 212, 0, 0.14);
   border-bottom: 2px solid rgba(255, 212, 0, 0.3);
 }
-
-.@{prefix}__textUnderline {
-  text-decoration: underline;
-}
-
 .@{prefix}__textStrikethrough {
   text-decoration: line-through;
 }
@@ -218,12 +224,6 @@
 .@{prefix}__textSuperscript {
   font-size: 0.8em;
   vertical-align: super;
-}
-.@{prefix}__textCode {
-  background-color: rgb(240, 242, 245);
-  padding: 1px 0.25rem;
-  font-family: Menlo, Consolas, Monaco, monospace;
-  font-size: 94%;
 }
 .@{prefix}__textLowercase {
   text-transform: lowercase;

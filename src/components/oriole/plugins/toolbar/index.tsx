@@ -15,7 +15,6 @@ import {
 import {
   $findMatchingParent,
   $getNearestNodeOfType,
-  $isEditorIsNestedEditor,
   mergeRegister,
 } from '@lexical/utils'
 import { $getSelectionStyleValueForProperty, $isParentElementRTL } from '@lexical/selection'
@@ -26,7 +25,7 @@ import {$isHeadingNode} from '@lexical/rich-text'
 import { $isCodeNode, normalizeCodeLanguage } from '@lexical/code'
 
 import { useToolbarState } from './context'
-import { IMAGE_CAPTION_CONTAINER, DEFAULT_FONT_COLOR, DEFAULT_BACKGROUND_COLOR, DEFAULT_FONT_FAMILY } from '~/config'
+import { DEFAULT_FONT_COLOR, DEFAULT_BACKGROUND_COLOR, DEFAULT_FONT_FAMILY } from '~/config'
 import { getSelectedNode, $findTopLevelElement } from './utils'
 import { blockTypeToBlockName, DEFAULT_FONT_SIZE } from './config'
 import BlockFormat from './block-format'
@@ -35,6 +34,8 @@ import {
   Redo,
   Bold,
   Italic,
+  Underline,
+  FormatCode,
 } from './stuff'
 import csses from './index.less'
 
@@ -88,16 +89,6 @@ const Toolbar = (props: Props) => {
     const selection = $getSelection()
 
     if ($isRangeSelection(selection)) {
-      if (activeEditor !== editor && $isEditorIsNestedEditor(activeEditor)) {
-        const rootElement = activeEditor.getRootElement()
-        updateToolbarState(
-          'isImageCaption',
-          !!rootElement?.parentElement?.classList.contains(IMAGE_CAPTION_CONTAINER),
-        );
-      } else {
-        updateToolbarState('isImageCaption', false)
-      }
-
       const anchorNode = selection.anchor.getNode()
       const element = $findTopLevelElement(anchorNode)
       const elementKey = element.getKey()
@@ -290,6 +281,8 @@ const Toolbar = (props: Props) => {
       />
       <Bold activeEditor={activeEditor} isEditable={isEditable} />
       <Italic activeEditor={activeEditor} isEditable={isEditable} />
+      <Underline activeEditor={activeEditor} isEditable={isEditable} />
+      <FormatCode activeEditor={activeEditor} isEditable={isEditable} />
     </div>
   )
 }

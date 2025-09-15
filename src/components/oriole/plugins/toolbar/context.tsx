@@ -17,7 +17,6 @@ const INITIAL_TOOLBAR_STATE = {
   isBold: false,
   isCode: false,
   isHighlight: false,
-  isImageCaption: false,
   isItalic: false,
   isLink: false,
   isRTL: false,
