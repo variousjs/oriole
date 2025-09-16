@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin'
 import { CharacterLimitPlugin } from '@lexical/react/LexicalCharacterLimitPlugin'
 import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin'
@@ -15,13 +15,15 @@ import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin
 import { TablePlugin } from '@lexical/react/LexicalTablePlugin'
 import { useLexicalEditable } from '@lexical/react/useLexicalEditable'
 
-import csses from './editor.less'
 import ContentEditable from './ui/content-editable'
 import ToolbarPlugin from './plugins/toolbar'
+import { ToolbarActions } from './types'
+import csses from './editor.less'
 
 interface Props {
   placeholder?: string,
   maxLength?: number,
+  toolbar: ToolbarActions,
 }
 
 const Editor = (props: Props) => {
@@ -36,7 +38,6 @@ const Editor = (props: Props) => {
       setFloatingAnchorElem(element)
     }
   }
-
 
   return (
     <div className={csses.editorContainer}>

@@ -22,7 +22,12 @@ const Oriole = () => {
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <ToolbarProvider>
-        <Editor />
+        <Editor toolbar={[
+          'TextColor',
+          'Bold',
+          ['Bold'],
+          'FontFamily',
+        ]} />
       </ToolbarProvider>
     </LexicalComposer>
   )
