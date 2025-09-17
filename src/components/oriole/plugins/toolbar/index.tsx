@@ -1,4 +1,4 @@
-import React, { Dispatch, useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import {
   $getSelection,
   $isElementNode,
@@ -7,7 +7,6 @@ import {
   CAN_REDO_COMMAND,
   CAN_UNDO_COMMAND,
   COMMAND_PRIORITY_CRITICAL,
-  LexicalEditor,
   LexicalNode,
   NodeKey,
   SELECTION_CHANGE_COMMAND,
@@ -17,6 +16,8 @@ import {
   $getNearestNodeOfType,
   mergeRegister,
 } from '@lexical/utils'
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
+import { useLexicalEditable } from '@lexical/react/useLexicalEditable'
 import { $getSelectionStyleValueForProperty, $isParentElementRTL } from '@lexical/selection'
 import { $isLinkNode } from '@lexical/link'
 import { $isListNode, ListNode } from '@lexical/list'
@@ -39,17 +40,15 @@ import {
 } from './stuff'
 import csses from './index.less'
 
-interface Props {
-  editor: LexicalEditor,
-  activeEditor: LexicalEditor,
-  setActiveEditor: Dispatch<LexicalEditor>,
-  setIsLinkEditMode: Dispatch<boolean>,
-}
-
-const Toolbar = (props: Props) => {
-  const { editor, activeEditor, setActiveEditor } = props
-  const { toolbarState, updateToolbarState } = useToolbarState()
-  const [isEditable, setIsEditable] = useState(() => editor.isEditable())
+const Toolbar = () => {
+  const [editor] = useLexicalComposerContext()
+  const isEditable = useLexicalEditable()
+  const {
+    toolbarState,
+    updateToolbarState,
+    activeEditor,
+    setActiveEditor,
+  } = useToolbarState()
   const [selectedElementKey, setSelectedElementKey] = useState<NodeKey | null>(null)
 
   const $handleHeadingNode = useCallback(
@@ -239,16 +238,13 @@ const Toolbar = (props: Props) => {
 
   useEffect(() => {
     return mergeRegister(
-      editor.registerEditableListener((editable) => {
-        setIsEditable(editable)
-      }),
       activeEditor.registerUpdateListener(({ editorState }) => {
         editorState.read(
           () => {
             $updateToolbar();
           },
           {editor: activeEditor},
-        );
+        )
       }),
       activeEditor.registerCommand<boolean>(
         CAN_UNDO_COMMAND,

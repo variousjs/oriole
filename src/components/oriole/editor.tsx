@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin'
 import { CharacterLimitPlugin } from '@lexical/react/LexicalCharacterLimitPlugin'
 import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin'
 import { ClearEditorPlugin } from '@lexical/react/LexicalClearEditorPlugin'
 import { ClickableLinkPlugin } from '@lexical/react/LexicalClickableLinkPlugin'
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary'
 import { HashtagPlugin } from '@lexical/react/LexicalHashtagPlugin'
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin'
@@ -28,10 +27,7 @@ interface Props {
 
 const Editor = (props: Props) => {
   const isEditable = useLexicalEditable()
-  const [editor] = useLexicalComposerContext()
   const [floatingAnchorElem, setFloatingAnchorElem] = useState<HTMLDivElement | null>(null)
-  const [activeEditor, setActiveEditor] = useState(editor)
-  const [isLinkEditMode, setIsLinkEditMode] = useState(false)
 
   const onEditorRef = (element: HTMLDivElement) => {
     if (element !== null) {
@@ -41,12 +37,7 @@ const Editor = (props: Props) => {
 
   return (
     <div className={csses.editorContainer}>
-      <ToolbarPlugin
-        editor={editor}
-        activeEditor={activeEditor}
-        setActiveEditor={setActiveEditor}
-        setIsLinkEditMode={setIsLinkEditMode}
-      />
+      <ToolbarPlugin />
       <AutoFocusPlugin />
       <ClearEditorPlugin />
       <HashtagPlugin />

@@ -1,5 +1,16 @@
-import React, { createContext, ReactNode, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { ElementFormatType } from 'lexical'
+import React, {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
+import { ElementFormatType, LexicalEditor } from 'lexical'
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
 import { blockTypeToBlockName, DEFAULT_FONT_SIZE, rootTypeToRootName } from './config'
 
 const INITIAL_TOOLBAR_STATE = {
@@ -36,6 +47,8 @@ type ToolbarStateValue<Key extends ToolbarStateKey> = ToolbarState[Key]
 
 interface ContextShape {
   toolbarState: ToolbarState,
+  activeEditor: LexicalEditor,
+  setActiveEditor: Dispatch<SetStateAction<LexicalEditor>>,
   updateToolbarState<Key extends ToolbarStateKey>(
     key: Key,
     value: ToolbarStateValue<Key>,
@@ -45,6 +58,8 @@ interface ContextShape {
 const Context = createContext<ContextShape | null>(null)
 
 export const ToolbarProvider = (props: { children: ReactNode }) => {
+  const [editor] = useLexicalComposerContext()
+  const [activeEditor, setActiveEditor] = useState(editor)
   const [toolbarState, setToolbarState] = useState(INITIAL_TOOLBAR_STATE)
   const selectionFontSize = toolbarState.fontSize
 
@@ -57,15 +72,17 @@ export const ToolbarProvider = (props: { children: ReactNode }) => {
     },[])
 
   useEffect(() => {
-    updateToolbarState('fontSizeInputValue', selectionFontSize.slice(0, -2));
-  }, [selectionFontSize, updateToolbarState]);
+    updateToolbarState('fontSizeInputValue', selectionFontSize.slice(0, -2))
+  }, [selectionFontSize, updateToolbarState])
 
   const contextValue = useMemo(() => {
     return {
       toolbarState,
       updateToolbarState,
+      activeEditor,
+      setActiveEditor,
     };
-  }, [toolbarState, updateToolbarState]);
+  }, [toolbarState, updateToolbarState, activeEditor, setActiveEditor])
 
   return (
     <Context.Provider value={contextValue}>

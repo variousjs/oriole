@@ -2,7 +2,7 @@ import React, { ReactNode, CSSProperties } from 'react'
 import { joinClasses } from '~/utils'
 import csses from './index.less'
 
-interface Props {
+export interface Props {
   style?: CSSProperties,
   children?: ReactNode,
   disabled?: boolean,
