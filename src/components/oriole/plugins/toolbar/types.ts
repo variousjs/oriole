@@ -1,7 +1,7 @@
-export type ButtonActions =
+export type ButtonAction =
   | 'Undo'
   | 'Redo'
-  | 'Text'
+  | 'Paragraph'
   | 'H1'
   | 'H2'
   | 'H3'
@@ -37,12 +37,19 @@ export type ButtonActions =
   | 'LeftAlign'
   | 'CenterAlign'
   | 'RightAlign'
+  | 'JustifyAlign'
   | 'Indent'
   | 'Outdent'
 
-export type DropdownActions =
-  | 'TextColor'
-  | 'TextBackgroundColor'
+export type DropdownAction =
+  | 'Color'
+  | 'BackgroundColor'
   | 'FontFamily'
 
-export type ToolbarActions = (ButtonActions | DropdownActions | ButtonActions[])[]
+export interface DropdownOption {
+  items: ButtonAction[],
+  type: 'block' | 'align' | 'format',
+}
+
+export type ToolbarActions =
+  ('_Divider' | ButtonAction | DropdownAction | DropdownOption[])[]

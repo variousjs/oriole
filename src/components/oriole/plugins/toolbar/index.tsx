@@ -98,7 +98,7 @@ const Toolbar = () => {
       const node = getSelectedNode(selection)
       const parent = node.getParent()
       const isLink = $isLinkNode(parent) || $isLinkNode(node)
-      updateToolbarState('isLink', isLink)
+      updateToolbarState('Link', isLink)
 
       const tableNode = $findMatchingParent(node, $isTableNode)
       if ($isTableNode(tableNode)) {
@@ -164,21 +164,21 @@ const Toolbar = () => {
 
     if ($isRangeSelection(selection) || $isTableSelection(selection)) {
       // Update text format
-      updateToolbarState('isBold', selection.hasFormat('bold'))
-      updateToolbarState('isItalic', selection.hasFormat('italic'))
-      updateToolbarState('isUnderline', selection.hasFormat('underline'))
-      updateToolbarState('isStrikethrough', selection.hasFormat('strikethrough'))
-      updateToolbarState('isSubscript', selection.hasFormat('subscript'))
-      updateToolbarState('isSuperscript', selection.hasFormat('superscript'))
-      updateToolbarState('isHighlight', selection.hasFormat('highlight'))
-      updateToolbarState('isCode', selection.hasFormat('code'))
+      updateToolbarState('Bold', selection.hasFormat('bold'))
+      updateToolbarState('Italic', selection.hasFormat('italic'))
+      updateToolbarState('Underline', selection.hasFormat('underline'))
+      updateToolbarState('Strikethrough', selection.hasFormat('strikethrough'))
+      updateToolbarState('Subscript', selection.hasFormat('subscript'))
+      updateToolbarState('Superscript', selection.hasFormat('superscript'))
+      updateToolbarState('Highlight', selection.hasFormat('highlight'))
+      updateToolbarState('Code', selection.hasFormat('code'))
       updateToolbarState(
         'fontSize',
         $getSelectionStyleValueForProperty(selection, 'font-size', `${DEFAULT_FONT_SIZE}px`),
       )
-      updateToolbarState('isLowercase', selection.hasFormat('lowercase'))
-      updateToolbarState('isUppercase', selection.hasFormat('uppercase'))
-      updateToolbarState('isCapitalize', selection.hasFormat('capitalize'))
+      updateToolbarState('Lowercase', selection.hasFormat('lowercase'))
+      updateToolbarState('Uppercase', selection.hasFormat('uppercase'))
+      updateToolbarState('Capitalize', selection.hasFormat('capitalize'))
     }
 
     if ($isNodeSelection(selection)) {
@@ -249,7 +249,7 @@ const Toolbar = () => {
       activeEditor.registerCommand<boolean>(
         CAN_UNDO_COMMAND,
         (payload) => {
-          updateToolbarState('canUndo', payload);
+          updateToolbarState('Undo', payload);
           return false;
         },
         COMMAND_PRIORITY_CRITICAL,
@@ -257,7 +257,7 @@ const Toolbar = () => {
       activeEditor.registerCommand<boolean>(
         CAN_REDO_COMMAND,
         (payload) => {
-          updateToolbarState('canRedo', payload);
+          updateToolbarState('Redo', payload);
           return false;
         },
         COMMAND_PRIORITY_CRITICAL,

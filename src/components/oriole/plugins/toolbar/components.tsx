@@ -71,7 +71,7 @@ export const Undo = (props: Props) => {
   return (
     <ButtonWrap
       {...props}
-      disabled={!toolbarState.canUndo || !isEditable}
+      disabled={!toolbarState.Undo || !isEditable}
       onClick={() => {
         activeEditor.dispatchCommand(UNDO_COMMAND, undefined)
       }}
@@ -88,7 +88,7 @@ export const Redo = (props: Props) => {
   return (
     <ButtonWrap
       {...props}
-      disabled={!toolbarState.canRedo || !isEditable}
+      disabled={!toolbarState.Redo || !isEditable}
       onClick={() => {
         activeEditor.dispatchCommand(REDO_COMMAND, undefined)
       }}
@@ -113,7 +113,7 @@ export const Bold = (props: Props) => {
       onClick={() => {
         activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold')
       }}
-      active={toolbarState.isBold}
+      active={toolbarState.Bold}
       title="Bold"
       prefix={<Icons.Bold />}
     />
@@ -135,7 +135,7 @@ export const Italic = (props: Props) => {
       onClick={() => {
         activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic')
       }}
-      active={toolbarState.isItalic}
+      active={toolbarState.Italic}
       title="Italic"
       prefix={<Icons.Italic />}
     />
@@ -157,7 +157,7 @@ export const Underline = (props: Props) => {
       onClick={() => {
         activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline')
       }}
-      active={toolbarState.isUnderline}
+      active={toolbarState.Underline}
       title="Underline"
       prefix={<Icons.Underline />}
     />
@@ -179,7 +179,7 @@ export const Code = (props: Props) => {
       onClick={() => {
         activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code')
       }}
-      active={toolbarState.isCode}
+      active={toolbarState.Code}
       title="Code"
       prefix={<Icons.Code />}
     />
@@ -202,7 +202,7 @@ export const Paragraph = (props: Props) => {
       onClick={() => formatParagraph(activeEditor)}
       active={toolbarState.blockType === 'paragraph'}
       title="Text"
-      prefix={<Icons.Text />}
+      prefix={<Icons.Paragraph />}
     />
   )
 }
@@ -248,7 +248,7 @@ export const BulletList = (props: Props) => {
       }}
       active={toolbarState.blockType === 'bullet'}
       title="BulletList"
-      prefix={<Icons.List />}
+      prefix={<Icons.BulletList />}
     />
   )
 }
