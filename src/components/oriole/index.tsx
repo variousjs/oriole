@@ -23,10 +23,23 @@ const Oriole = () => {
     <LexicalComposer initialConfig={initialConfig}>
       <ToolbarProvider>
         <Editor toolbar={[
-          'TextColor',
+          'Undo',
+          'Redo',
+          "_Divider",
+          [
+            {
+              type: 'block',
+              items: [
+                'H1',
+                'H2',
+                'H3',
+                'H4',
+                'H5',
+                'H6',
+              ],
+            },
+          ],
           'Bold',
-          ['Bold'],
-          'FontFamily',
         ]} />
       </ToolbarProvider>
     </LexicalComposer>

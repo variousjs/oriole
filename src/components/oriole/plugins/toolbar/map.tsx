@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 import DropDown, { DropDownItem } from '~/ui/dropdown'
 import Button from '~/ui/button'
 import * as ActionButtons from './components'
 import * as Icons from '~/ui/icons'
 import { ToolbarActions } from './types'
 import { useToolbarState } from './context'
+import csses from './index.less'
 
 interface Props {
   actions: ToolbarActions
@@ -20,7 +21,7 @@ const blockMap = {
   h4: 'H4',
   h5: 'H5',
   h6: 'H6',
-  number: 'NumbereList',
+  number: 'NumberList',
   paragraph: 'Paragraph',
   quote: 'Quote',
 }
@@ -35,13 +36,17 @@ const ActionsMap = (props: Props) => {
   const { toolbarState } = useToolbarState()
   const { actions } = props
 
+  const onDropDownItemClick = (e: MouseEvent<HTMLDivElement>) => {
+    e.currentTarget.querySelector('button')?.click()
+  }
+
   return (
-    <div>
+    <div className={csses.toolbar}>
       {
         actions.map((action, i) => {
           if (typeof action === 'string') {
             if (action === '_Divider') {
-              return (<span key={action + i}>|</span>)
+              return (<div className={csses.divider} key={action + i} />)
             }
 
             const A = ActionButtons[action as 'Undo']
@@ -89,8 +94,8 @@ const ActionsMap = (props: Props) => {
                       }
 
                       return (
-                        <DropDownItem key={item + k}>
-                          <B />
+                        <DropDownItem onClick={onDropDownItemClick} key={item + k}>
+                          <B blockType="dropdown" />
                         </DropDownItem>
                       )
                     })

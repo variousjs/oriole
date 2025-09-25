@@ -15,8 +15,7 @@ import { TablePlugin } from '@lexical/react/LexicalTablePlugin'
 import { useLexicalEditable } from '@lexical/react/useLexicalEditable'
 
 import ContentEditable from './ui/content-editable'
-import ToolbarPlugin from './plugins/toolbar'
-import { ToolbarActions } from './types'
+import ToolbarPlugin, {ToolbarActions } from './plugins/toolbar'
 import csses from './editor.less'
 
 interface Props {
@@ -37,7 +36,7 @@ const Editor = (props: Props) => {
 
   return (
     <div className={csses.editorContainer}>
-      <ToolbarPlugin />
+      <ToolbarPlugin actions={props.toolbar} />
       <AutoFocusPlugin />
       <ClearEditorPlugin />
       <HashtagPlugin />

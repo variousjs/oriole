@@ -29,7 +29,7 @@ import { useToolbarState } from './context'
 import { DEFAULT_FONT_COLOR, DEFAULT_BACKGROUND_COLOR, DEFAULT_FONT_FAMILY } from '~/config'
 import { getSelectedNode, $findTopLevelElement } from './utils'
 import { blockTypeToBlockName, DEFAULT_FONT_SIZE } from './config'
-import BlockFormat from './block-format'
+// import BlockFormat from './block-format'
 import {
   Undo,
   Redo,
@@ -38,9 +38,17 @@ import {
   Underline,
   FormatCode,
 } from './stuff'
+import { ToolbarActions } from './types'
+import ActionsMap from './map'
 import csses from './index.less'
 
-const Toolbar = () => {
+export type { ToolbarActions } from './types'
+
+export interface Props {
+  actions: ToolbarActions
+}
+
+const Toolbar = (props: Props) => {
   const [editor] = useLexicalComposerContext()
   const isEditable = useLexicalEditable()
   const {
@@ -267,18 +275,19 @@ const Toolbar = () => {
 
   return (
     <div className={csses.toolbar}>
-      <Undo activeEditor={activeEditor} isEditable={isEditable} />
-      <Redo activeEditor={activeEditor} isEditable={isEditable} />
-      <BlockFormat
+      {/* <Undo activeEditor={activeEditor} isEditable={isEditable} /> */}
+      {/* <Redo activeEditor={activeEditor} isEditable={isEditable} /> */}
+      {/* <BlockFormat
         disabled={!isEditable}
         blockType={toolbarState.blockType}
         editor={activeEditor}
         activeEditor={activeEditor}
-      />
-      <Bold activeEditor={activeEditor} isEditable={isEditable} />
-      <Italic activeEditor={activeEditor} isEditable={isEditable} />
-      <Underline activeEditor={activeEditor} isEditable={isEditable} />
-      <FormatCode activeEditor={activeEditor} isEditable={isEditable} />
+      /> */}
+      {/* <Bold activeEditor={activeEditor} isEditable={isEditable} /> */}
+      {/* <Italic activeEditor={activeEditor} isEditable={isEditable} /> */}
+      {/* <Underline activeEditor={activeEditor} isEditable={isEditable} /> */}
+      {/* <FormatCode activeEditor={activeEditor} isEditable={isEditable} /> */}
+      <ActionsMap actions={props.actions} />
     </div>
   )
 }
